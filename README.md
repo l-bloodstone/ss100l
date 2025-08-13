@@ -3,10 +3,10 @@
 ---
 
 ### Build
-```sh 
-    make build
+```sh
+make build
 ```
 ### To Build and Run
-```sh 
-    make run
+```sh
+make run
 ```
