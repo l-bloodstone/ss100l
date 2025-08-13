@@ -17,7 +17,7 @@ char** tokenize_line(char* line) {
     if (s == 0) {
         exit(EXIT_SUCCESS);
     }
-    #define TOKENS_BUFFER_SIZE 128
+    int TOKENS_BUFFER_SIZE = 128;
     char** tokens = malloc(TOKENS_BUFFER_SIZE * sizeof(char*));
     if (!tokens) {
         perror("Allocation failed!!");
@@ -33,6 +33,10 @@ char** tokenize_line(char* line) {
         tokens[i] = token;
         if (i == TOKENS_BUFFER_SIZE - 1) {
             tokens = realloc(tokens, TOKENS_BUFFER_SIZE * 2);
+            if (!tokens) {
+                perror("Allocation Failed!!");
+            }
+            TOKENS_BUFFER_SIZE *= 2;
         }
         token = strtok(NULL, TOKEN_DELIM);
     }
