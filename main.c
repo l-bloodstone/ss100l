@@ -60,6 +60,8 @@ void shell_loop(){
         char* line = prompt();
         char** args = tokenize_line(line);
         execute_command(args);
+        free(line);
+        free(args);
     }
 }
 
