@@ -64,7 +64,7 @@ int execute_command(char** args) {
     if (pid == 0) {
         close(fd[0]);
         int exit_status = execvp(args[0], args);
-        write(fd[1], (void*)&exit_status, 4);
+        write(fd[1], (void*)&exit_status, sizeof(int));
         close(fd[1]);
         // explicit exit from child process
         exit(exit_status);
@@ -72,7 +72,7 @@ int execute_command(char** args) {
         close(fd[1]);
         wait(NULL);
         int status = 0;
-        read(fd[0], (void*)&status, 4);
+        read(fd[0], (void*)&status, sizeof(int));
         close(fd[0]);
         return status;
     }
